@@ -11,7 +11,6 @@ type Props = {
 
 const NavLink = ({ href, label,}: Props) => {
   const pathname = usePathname();
-  console.log("pathname::: ", pathname);
   return (
     <NavbarItem 
     isActive={pathname === href}
