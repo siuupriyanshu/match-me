@@ -3,8 +3,11 @@ import Link from 'next/link'
 import React from 'react'
 import { GiSelfLove } from 'react-icons/gi'
 import NavLink from './NavLink'
+import { auth } from "@/auth";
+import UserMenu from './UserMenu'
 
-const TopNav = () => {
+const TopNav = async () => {
+    const session = await auth();
   return (
     <Navbar 
     maxWidth='full'
@@ -34,20 +37,28 @@ const TopNav = () => {
         </NavbarContent>
 
         <NavbarContent justify='end'>
+        {session?.user ? (
+          <UserMenu user={session.user} />
+        ) : (
+          <>
             <Button
-            as={Link}
-            href="/login"
-            variant='bordered'
-            className='text-white'
+              as={Link}
+              href="/login"
+              variant="bordered"
+              className="text-white"
             >
-                Login
+              Login
             </Button>
             <Button
-             as={Link}
-             href="/register"
-             variant="bordered"
-             className="text-white"
-            >Register</Button>
+              as={Link}
+              href="/register"
+              variant="bordered"
+              className="text-white"
+            >
+              Register
+            </Button>
+          </>
+        )} 
         </NavbarContent>
     </Navbar>
   )
