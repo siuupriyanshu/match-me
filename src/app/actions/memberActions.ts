@@ -23,8 +23,10 @@ export async function getMembers() {
 export async function getMemberByUserId(userId: string) {
     try {
         return prisma.member.findUnique({ where: { userId } })
+        throw new Error('User not found');
     } catch (error) {
         console.log(error);
+        throw error;
     }
 }
 
